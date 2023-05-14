@@ -38,6 +38,8 @@ class CharactersActivity : AppCompatActivity() {
     }
 
     private fun onLoading() {
+        _binding.statusFilter.isVisible = false
+        _binding.genderFilter.isVisible = false
         _binding.charactersList.isVisible = false
         _binding.charactersError.root.isVisible = false
         _binding.progressBar.isVisible = true
@@ -45,13 +47,18 @@ class CharactersActivity : AppCompatActivity() {
 
     private fun onLoaded(state: CharactersViewState.Loaded) {
         _binding.progressBar.isVisible = false
+        _binding.statusFilter.isVisible = true
+        _binding.genderFilter.isVisible = true
         _binding.charactersError.root.isVisible = false
         _binding.charactersList.isVisible = true
+
         setupCharactersList(state)
     }
 
     private fun onError() {
         _binding.progressBar.isVisible = false
+        _binding.statusFilter.isVisible = false
+        _binding.genderFilter.isVisible = false
         _binding.charactersList.isVisible = false
         _binding.charactersError.root.isVisible = true
 
