@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.app_rickandmorty.characteresList.CharactersAdapter
-import com.example.app_rickandmorty.databinding.ActivityMainBinding
+import com.example.app_rickandmorty.databinding.ActivityCharactersBinding
+import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var _binding: ActivityMainBinding
+class CharactersActivity : AppCompatActivity() {
+    private lateinit var _binding: ActivityCharactersBinding
     private val viewModel: CharactersViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViewBinding() {
-        _binding = ActivityMainBinding.inflate(layoutInflater)
+        _binding = ActivityCharactersBinding.inflate(layoutInflater)
         val view = _binding.root
         setContentView(view)
     }
@@ -36,18 +38,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onLoading() {
+        _binding.charactersList.isVisible = false
+        _binding.charactersError.root.isVisible = false
         _binding.progressBar.isVisible = true
     }
 
     private fun onLoaded(state: CharactersViewState.Loaded) {
         _binding.progressBar.isVisible = false
+        _binding.charactersError.root.isVisible = false
         _binding.charactersList.isVisible = true
         setupCharactersList(state)
     }
 
     private fun onError() {
         _binding.progressBar.isVisible = false
-        TODO("Not yet implemented")
+        _binding.charactersList.isVisible = false
+        _binding.charactersError.root.isVisible = true
+
+        _binding.charactersError.btnTryAgain.setOnClickListener {
+            viewModel.viewModelScope.launch { viewModel.getCharacters() }
+        }
     }
 
     private fun setupCharactersList(state: CharactersViewState.Loaded) {

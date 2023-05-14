@@ -23,7 +23,7 @@ internal class CharactersViewModel(
         }
     }
 
-    private suspend fun getCharacters() {
+    suspend fun getCharacters() {
         mutableViewState.postValue(CharactersViewState.Loading)
 
         try {
