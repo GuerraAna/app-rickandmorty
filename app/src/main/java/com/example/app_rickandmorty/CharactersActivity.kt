@@ -53,6 +53,16 @@ class CharactersActivity : AppCompatActivity() {
         _binding.charactersList.isVisible = true
 
         setupCharactersList(state)
+
+        _binding.statusFilter.setOnClickListener {
+            val bottomSheet = StatusFilterBottomSheet.newInstance()
+            bottomSheet.show(supportFragmentManager, bottomSheet.tag)
+        }
+
+        _binding.genderFilter.setOnClickListener {
+            val bottomSheet = GenderFilterBottomSheet.newInstance()
+            bottomSheet.show(supportFragmentManager, bottomSheet.tag)
+        }
     }
 
     private fun onError() {
