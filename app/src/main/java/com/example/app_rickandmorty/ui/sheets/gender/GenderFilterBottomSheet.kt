@@ -1,12 +1,13 @@
-package com.example.app_rickandmorty
+package com.example.app_rickandmorty.ui.sheets.gender
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
+import com.example.app_rickandmorty.R
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class GenderFilterBottomSheet : DialogFragment() {
+class GenderFilterBottomSheet : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
