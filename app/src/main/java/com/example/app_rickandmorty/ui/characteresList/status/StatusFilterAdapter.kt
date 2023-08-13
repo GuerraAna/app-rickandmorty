@@ -1,4 +1,4 @@
-package com.example.app_rickandmorty.ui.sheets.status
+package com.example.app_rickandmorty.ui.characteresList.status
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

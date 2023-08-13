@@ -1,16 +1,16 @@
-package com.example.app_rickandmorty.ui.sheets.status
+package com.example.app_rickandmorty.ui.characteresList.gender
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.app_rickandmorty.databinding.StatusFilterFragmentBinding
+import com.example.app_rickandmorty.databinding.GenderFilterBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class StatusFilterBottomSheet : BottomSheetDialogFragment() {
+class GenderFilterBottomSheet : BottomSheetDialogFragment() {
 
-    private lateinit var _binding: StatusFilterFragmentBinding
+    private lateinit var binding: GenderFilterBottomSheetBinding
 
     private val list: List<String> by lazy {
         arguments?.getStringArrayList(EXTRA_LIST)?.toList() ?: emptyList()
@@ -25,13 +25,13 @@ class StatusFilterBottomSheet : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = StatusFilterFragmentBinding.inflate(inflater, container, false)
-        _binding.apply {
-            statusFilterList.layoutManager = LinearLayoutManager(context)
-            statusFilterList.adapter = StatusFilterAdapter(list, secondList)
+        binding = GenderFilterBottomSheetBinding.inflate(inflater, container, false)
+        binding.apply {
+            genderFilterList.layoutManager = LinearLayoutManager(context)
+            genderFilterList.adapter = GenderFilterAdapter(list, secondList)
         }
 
-        return _binding.root
+        return binding.root
     }
 
     companion object {
@@ -43,13 +43,13 @@ class StatusFilterBottomSheet : BottomSheetDialogFragment() {
          * @return The new instance.
          */
         fun newInstance(
-            listOfStatus: List<String>,
-            listOfStatusDescription: List<String>
-        ) : StatusFilterBottomSheet =
-            StatusFilterBottomSheet().apply {
+            listOfGender: List<String>,
+            listOfGenderDescription: List<String>
+        ) : GenderFilterBottomSheet =
+            GenderFilterBottomSheet().apply {
                 arguments = Bundle().apply {
-                   putStringArrayList(EXTRA_LIST, ArrayList(listOfStatus))
-                   putStringArrayList(EXTRA_SECOND_LIST, ArrayList(listOfStatusDescription))
+                    putStringArrayList(EXTRA_LIST, ArrayList(listOfGender))
+                    putStringArrayList(EXTRA_SECOND_LIST, ArrayList(listOfGenderDescription))
                 }
             }
     }

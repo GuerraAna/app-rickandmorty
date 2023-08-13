@@ -11,8 +11,8 @@ import com.example.app_rickandmorty.CharactersViewModel
 import com.example.app_rickandmorty.CharactersViewState
 import com.example.app_rickandmorty.analytics.AnalyticsPageName
 import com.example.app_rickandmorty.analytics.TrackedPage
-import com.example.app_rickandmorty.ui.sheets.gender.GenderFilterBottomSheet
-import com.example.app_rickandmorty.ui.sheets.status.StatusFilterBottomSheet
+import com.example.app_rickandmorty.ui.characteresList.gender.GenderFilterBottomSheet
+import com.example.app_rickandmorty.ui.characteresList.status.StatusFilterBottomSheet
 import com.example.app_rickandmorty.characteresList.CharactersAdapter
 import com.example.app_rickandmorty.databinding.ActivityCharactersBinding
 import kotlinx.coroutines.launch
@@ -73,13 +73,10 @@ internal class CharactersActivity : AppCompatActivity(), TrackedPage {
 
         setupCharactersList(state)
 
-        // Status.Dead,
-        //            Status.Alive,
-        //            Status.InAnotherLife
         val listOfStatus = listOf(
-            "MORTO",
-            "VIVO",
-            "EM OUTRA VIDA"
+            "mortinho da silva",
+            "vivaço",
+            "ta na melhor"
         )
 
         val listOfStatusDescription = listOf(
@@ -98,9 +95,26 @@ internal class CharactersActivity : AppCompatActivity(), TrackedPage {
             statusBottomSheet.show(supportFragmentManager, statusBottomSheet.tag)
         }
 
+        val listOfGender = listOf(
+            "Homem",
+            "Mulher",
+            "Outrossas"
+        )
+
+        val listOfGenderDescription = listOf(
+            "homenzin",
+            "mulhererzaoo",
+            "outrxx"
+        )
+
         _binding.genderFilter.setOnClickListener {
-            val bottomSheet = GenderFilterBottomSheet.newInstance()
-            bottomSheet.show(supportFragmentManager, bottomSheet.tag)
+            val genderBottomSheet =
+                GenderFilterBottomSheet.newInstance(
+                    listOfGender,
+                    listOfGenderDescription
+                )
+
+            genderBottomSheet.show(supportFragmentManager, genderBottomSheet.tag)
         }
     }
 
